@@ -103,6 +103,7 @@ Goal: Update the app from last class using the code above
 3. In terminal, `shiny run --reload app.py`
 
 
+
 ## Reactive Functions: Normal Distribution Example
 - Your updated app should look like the following
 - But with a different histogram + summary stats, because it was a random sample

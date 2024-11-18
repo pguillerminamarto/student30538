@@ -857,3 +857,28 @@ Steps to a dashboard in Shiny
 
 Debugging is trickier with apps, since errors can be at command line or in the app itself
 
+```{python}
+app_ui = ui.page_fluid(
+    ui.input_select(id='select_input', label='Choose an option:', choices=['Option 1', 'Option 2', 'Option 3']),
+    ui.input_radio_buttons(id='outcome', label='Choose an outcome:', choices=["Cases", "Deaths"]),  # new code
+    ui.output_plot('ts'),
+    ui.output_table("subsetted_data_table")
+)
+
+@render.plot
+def ts():
+    df = subsetted_data()
+    if input.outcome() == "Cases": #begin new code
+        series = df['cases']       #
+    if input.outcome() == "Deaths":#
+        series = df['deaths']      # end new code
+    fig, ax = plt.subplots(figsize=(3,6))
+    ax.plot(df['date'], series)
+    ax.tick_params(axis = 'x', rotation = 45)
+    ax.set_xlabel('Date')
+    ax.set_ylabel(input.outcome())
+    ax.set_title(f'COVID-19 {input.outcome()} in {input.state()}')
+    ax.set_yticklabels(['{:,}'.format(int(x)) for x in ax.get_yticks()])
+    return fig
+```
+
