@@ -920,6 +920,20 @@ app_ui = ui.page_navbar(
 
 :::
 
+```{python}
+page2 = ui.layout_columns(
+    ui.card(
+        ui.card_header()
+        ui.output_dataframe('data')
+        full_screen = True
+    )
+)
+
+@render.dataframe
+def data_for_page2():
+    return df[["Species", "Island", "body_mass_g"]]
+```
+
 ::: {.column width="50%"}
 1. UI-side: define a new UI element called `page2`, based on `page1`
 2. UI-side: add a `ui.card()` with title ("Penguins sorted by body mass")
